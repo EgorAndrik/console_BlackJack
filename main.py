@@ -75,7 +75,7 @@ while messeg.lower() == 'y':
         tokenDealer = countToken(cardsDealer)
         print(f'Dealer have --> {cardsDealer}')
         print(f'Dealer have > {tokenDealer} < tokens')
-        print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n')
+        print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n')
         messeg = input('Want to take a card, continue or pass?\nt/c/p -> ')
         if messeg.lower() in 'tc':
             if messeg.lower() == 't':
@@ -93,14 +93,14 @@ while messeg.lower() == 'y':
             elif tokenPlayer > 21:
                 print('You lose')
             else:
-                print('\n$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+                print('\n$$$$$$$$$$$$$$$-----DEALER-----$$$$$$$$$$$$$$$')
                 while tokenDealer < 17:
                     tmp = cardSelection(deck, 1)
                     deck, cardsDealer = tmp[0], cardsDealer + ' ' + tmp[1]
                     tokenDealer = countToken(cardsDealer)
                 print(f'Dealer have --> {cardsDealer}')
                 print(f'Dealer have > {tokenDealer} < tokens')
-                print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n')
+                print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n')
                 print(whoWin(tokenPlayer, tokenDealer))
         else:
             print('You lose')
