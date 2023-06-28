@@ -57,7 +57,6 @@ def whoWin(tokenPlayer: int, tokenDealer: int) -> str:
 
 print('Welcome to BlackJack, sir. Shall we start the game?')
 messeg = input('y/n -> ')
-deck = cardShuffle(DataCard)
 while messeg.lower() == 'y':
     os.system('CLS')
     print("Let's start the game well.")
@@ -65,6 +64,7 @@ while messeg.lower() == 'y':
     messeg = input('s/n -> ')
     if messeg.lower() == 's':
         os.system('CLS')
+        deck = cardShuffle(DataCard)
         print('-------------------BLACK JACK-------------------')
         deck, cardsPlayer = cardSelection(deck, 2)
         tokenPlayer = countToken(cardsPlayer)
@@ -89,9 +89,9 @@ while messeg.lower() == 'y':
                         break
                     messeg = input('More?\ny/n -> ')
             if tokenPlayer == 21 and len(cardsPlayer.replace(' ', '')) == 2:
-                print('You win')
+                print('\nYou win\n')
             elif tokenPlayer > 21:
-                print('You lose')
+                print('\nYou lose\n')
             else:
                 print('\n$$$$$$$$$$$$$$$-----DEALER-----$$$$$$$$$$$$$$$')
                 while tokenDealer < 17:
@@ -100,9 +100,9 @@ while messeg.lower() == 'y':
                     tokenDealer = countToken(cardsDealer)
                 print(f'Dealer have --> {cardsDealer}')
                 print(f'Dealer have > {tokenDealer} < tokens')
-                print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n')
-                print(whoWin(tokenPlayer, tokenDealer))
+                print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+                print(f'\n{whoWin(tokenPlayer, tokenDealer)}\n')
         else:
-            print('You lose')
+            print('\nYou lose\n')
         messeg = input('Shall we continue the game?\ny/n -> ')
 print('Until the next game, sir')
