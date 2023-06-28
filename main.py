@@ -65,7 +65,7 @@ while messeg.lower() == 'y':
     if messeg.lower() == 's':
         os.system('CLS')
         deck = cardShuffle(DataCard)
-        print('-------------------BLACK JACK-------------------')
+        print('-----------------BLACK JACK------------------')
         deck, cardsPlayer = cardSelection(deck, 2)
         tokenPlayer = countToken(cardsPlayer)
         print(f'You have cards --> {cardsPlayer}')
