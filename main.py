@@ -1,4 +1,4 @@
-from random import sample, choice
+from random import sample
 import os
 
 
@@ -11,10 +11,10 @@ CardDeck = {
     7: ['🂧', '🂷', '🃗', '🃇'],
     8: ['🂨', '🂸', '🃘', '🃈'],
     9: ['🂩', '🂹', '🃙', '🃉'],
-    10: ['🂪', '🂺', '🃚', '🃊',
-         '🂻', '🂫', '🃋', '🃛',
-         '🂭', '🂽', '🃝', '🃍',
-         '🃎', '🂾', '🃞', '🃎'],
+    10: ['🂺', '🂻', '🂽', '🂾',
+         '🂪', '🂫', '🂭', '🂮',
+         '🃊', '🃋', '🃍', '🃎',
+         '🃚', '🃛', '🃝', '🃞'],
     11: ['🂱', '🂡', '🃁', '🃑'],
 }
 DataCard = ['🂱', '🂲', '🂳', '🂴', '🂵', '🂶', '🂷', '🂸', '🂹', '🂺', '🂻', '🂽', '🂾',
@@ -27,15 +27,14 @@ cardsPlayer, cardsDealer = '', ''
 
 def cardShuffle(dataCard: list) -> list:
     playDeck = sample(dataCard, len(dataCard))
-    for i in range(10):
+    for i in range(42):
         playDeck = sample(dataCard, len(dataCard))
     return playDeck
 
 
 def cardSelection(dataCard: list, countCrads: int) -> list:
-    resCards = [choice(dataCard) for _ in range(countCrads)]
-    for card in resCards:
-        dataCard.remove(card)
+    resCards = [dataCard[i] for i in range(countCrads)]
+    dataCard = dataCard[countCrads + 1:]
     return [dataCard, ' '.join(resCards)]
 
 
@@ -58,6 +57,7 @@ def whoWin(tokenPlayer: int, tokenDealer: int) -> str:
 
 print('Welcome to BlackJack, sir. Shall we start the game?')
 messeg = input('y/n -> ')
+deck = cardShuffle(DataCard)
 while messeg.lower() == 'y':
     os.system('CLS')
     print("Let's start the game well.")
@@ -65,8 +65,8 @@ while messeg.lower() == 'y':
     messeg = input('s/n -> ')
     if messeg.lower() == 's':
         os.system('CLS')
-        print('---------------BLACK JACK---------------')
-        deck, cardsPlayer = cardSelection(DataCard, 2)
+        print('-------------------BLACK JACK-------------------')
+        deck, cardsPlayer = cardSelection(deck, 2)
         tokenPlayer = countToken(cardsPlayer)
         print(f'You have cards --> {cardsPlayer}')
         print(f'You have > {tokenPlayer} < tokens')
@@ -79,7 +79,7 @@ while messeg.lower() == 'y':
         messeg = input('Want to take a card, continue or pass?\nt/c/p -> ')
         if messeg.lower() in 'tc':
             if messeg.lower() == 't':
-                while messeg == 'yes' or messeg == 't':
+                while messeg == 'y' or messeg == 't':
                     tmp = cardSelection(deck, 1)
                     deck, cardsPlayer = tmp[0], cardsPlayer + ' ' + tmp[1]
                     tokenPlayer = countToken(cardsPlayer)
@@ -87,8 +87,8 @@ while messeg.lower() == 'y':
                     print(f'You have > {tokenPlayer} < tokens')
                     if tokenPlayer > 21:
                         break
-                    messeg = input('More?\nyes/stop -> ')
-            if tokenPlayer == 21:
+                    messeg = input('More?\ny/n -> ')
+            if tokenPlayer == 21 and len(cardsPlayer.replace(' ', '')) == 2:
                 print('You win')
             elif tokenPlayer > 21:
                 print('You lose')
