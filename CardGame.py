@@ -72,15 +72,12 @@ class BlackJack:
         self.tokenPlayer, self.tokenDealer = 0, 0
 
     def _cardShuffle(self, dataCard: list) -> list:
-        playDeck = sample(dataCard, len(dataCard))
         for i in range(42):
-            playDeck = sample(dataCard, len(dataCard))
-        return playDeck
+            dataCard = sample(dataCard, len(dataCard))
+        return dataCard
 
     def _cardSelection(self, dataCard: list, countCrads: int) -> list:
-        resCards = [dataCard[i] for i in range(countCrads)]
-        dataCard = dataCard[countCrads + 1:]
-        return [dataCard, ' '.join(resCards)]
+        return [dataCard[countCrads:], ' '.join([dataCard[i] for i in range(countCrads)])]
 
     def _countToken(self, playerCards: str) -> int:
         tokens = 0
