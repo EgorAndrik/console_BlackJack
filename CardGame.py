@@ -27,6 +27,7 @@ class BlackJack:
         ]
         self.tokenPlayer, self.tokenDealer = 0, 0
         self.cardsPlayer, self.cardsDealer = '', ''
+        self.cntRound, self.cntWin, self.cntLose = 0, 0, 0
 
     def Game(self):
         os.system('CLS')
@@ -56,8 +57,10 @@ class BlackJack:
                     messeg = input('More?\ny/n -> ')
             if self.tokenPlayer == 21 and len(self.cardsPlayer.replace(' ', '')) == 2:
                 print('\nYou win\n')
+                self.cntWin += 1
             elif self.tokenPlayer > 21:
                 print('\nYou lose\n')
+                self.cntLose += 1
             else:
                 print('\n$$$$$$$$$$$$$$$-----DEALER-----$$$$$$$$$$$$$$$')
                 while self.tokenDealer < 17:
@@ -67,11 +70,21 @@ class BlackJack:
                 print(f'Dealer have --> {self.cardsDealer}')
                 print(f'Dealer have > {self.tokenDealer} < tokens')
                 print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
-                print(f'\n{self._whoWin(self.tokenPlayer, self.tokenDealer)}\n')
+                resRound = self._whoWin(self.tokenPlayer, self.tokenDealer)
+                if resRound == 'You Win':
+                    self.cntWin += 1
+                elif resRound == 'You Lose':
+                    self.cntLose += 1
+                print(f'\n{resRound}\n')
         else:
             print('\nYou lose\n')
+            self.cntLose += 1
         self.tokenPlayer, self.tokenDealer = '', ''
         self.tokenPlayer, self.tokenDealer = 0, 0
+        self.cntRound += 1
+
+    def getResultsGame(self):
+        return f'Was {self.cntRound} rounds\nYou win {self.cntWin}\nYou lose {self.cntLose}\n'
 
     def _cardShuffle(self, dataCard: list) -> list:
         for i in range(42):

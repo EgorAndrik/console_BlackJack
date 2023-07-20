@@ -8,6 +8,7 @@ def cardGameLaunch():
     while messeg.lower() == 'y':
         Game_BJ.Game()
         messeg = input('Shall we continue the game?\ny/n -> ')
+    print(Game_BJ.getResultsGame())
     print('Until the next game, sir')
 
 
