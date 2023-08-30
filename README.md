@@ -6,3 +6,11 @@
 <img alt="python" src="https://img.shields.io/badge/python-3.10-yellow.svg"/>
 
 **Console version of the Black Jack card game**
+
+## How to use?
+
+After you have cloned the repository, you need to go to the repository folder through the console and run the code with a command from the console.
+
+```
+python main.py
+```
