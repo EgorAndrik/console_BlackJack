@@ -31,12 +31,14 @@ class BlackJack:
 
     def Game(self):
         os.system('CLS')
+
         print('-----------------BLACK JACK------------------')
         deck = self._cardShuffle(self.DataCard)
         deck, self.cardsPlayer = self._cardSelection(deck, 2)
         self.tokenPlayer = self._countToken(self.cardsPlayer)
         print(f'You have cards --> {self.cardsPlayer}')
         print(f'You have > {self.tokenPlayer} < tokens')
+
         print('\n$$$$$$$$$$$$$$$-----DEALER-----$$$$$$$$$$$$$$$')
         deck, self.cardsDealer = self._cardSelection(deck, 1)
         self.tokenDealer = self._countToken(self.cardsDealer)
@@ -44,6 +46,7 @@ class BlackJack:
         print(f'Dealer have > {self.tokenDealer} < tokens')
         print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n')
         messeg = input('Want to take a card, continue or pass?\nt/c/p -> ')
+
         if messeg.lower() in 'tc':
             if messeg.lower() == 't':
                 while messeg == 'y' or messeg == 't':
