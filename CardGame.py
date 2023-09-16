@@ -33,20 +33,17 @@ class BlackJack:
         os.system('CLS')
 
         print('-----------------BLACK JACK------------------')
+
         deck = self._cardShuffle(self.DataCard)
         deck, self.cardsPlayer = self._cardSelection(deck, 2)
         self.tokenPlayer = self._countToken(self.cardsPlayer)
+
         print(f'You have cards --> {self.cardsPlayer}')
         print(f'You have > {self.tokenPlayer} < tokens')
 
-        print('\n$$$$$$$$$$$$$$$-----DEALER-----$$$$$$$$$$$$$$$')
-        deck, self.cardsDealer = self._cardSelection(deck, 1)
-        self.tokenDealer = self._countToken(self.cardsDealer)
-        print(f'Dealer have --> {self.cardsDealer}')
-        print(f'Dealer have > {self.tokenDealer} < tokens')
-        print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n')
-        messeg = input('Want to take a card, continue or pass?\nt/c/p -> ')
+        deck = self._first_dealer_move(deck)
 
+        messeg = input('Want to take a card, continue or pass?\nt/c/p -> ')
         if messeg.lower() in 'tc':
             if messeg.lower() == 't':
                 while messeg == 'y' or messeg == 't':
@@ -65,14 +62,8 @@ class BlackJack:
                 print('\nYou lose\n')
                 self.cntLose += 1
             else:
-                print('\n$$$$$$$$$$$$$$$-----DEALER-----$$$$$$$$$$$$$$$')
-                while self.tokenDealer < 17:
-                    tmp = self._cardSelection(deck, 1)
-                    deck, self.cardsDealer = tmp[0], self.cardsDealer + ' ' + tmp[1]
-                    self.tokenDealer = self._countToken(self.cardsDealer)
-                print(f'Dealer have --> {self.cardsDealer}')
-                print(f'Dealer have > {self.tokenDealer} < tokens')
-                print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+                self._dealer_move(deck)
+
                 resRound = self._whoWin(self.tokenPlayer, self.tokenDealer)
                 if resRound == 'You Win':
                     self.cntWin += 1
@@ -113,3 +104,24 @@ class BlackJack:
         return 'You Win' if tokenPlayer > tokenDealer or tokenDealer > 21 \
             else 'You Lose' if tokenPlayer < tokenDealer \
             else 'Draw'
+
+    def _first_dealer_move(self, deck: list):
+        print('\n$$$$$$$$$$$$$$$-----DEALER-----$$$$$$$$$$$$$$$')
+
+        deck, self.cardsDealer = self._cardSelection(deck, 1)
+        self.tokenDealer = self._countToken(self.cardsDealer)
+
+        print(f'Dealer have --> {self.cardsDealer}')
+        print(f'Dealer have > {self.tokenDealer} < tokens')
+        print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n')
+        return deck
+
+    def _dealer_move(self, deck: list):
+        print('\n$$$$$$$$$$$$$$$-----DEALER-----$$$$$$$$$$$$$$$')
+        while self.tokenDealer < 17:
+            tmp = self._cardSelection(deck, 1)
+            deck, self.cardsDealer = tmp[0], self.cardsDealer + ' ' + tmp[1]
+            self.tokenDealer = self._countToken(self.cardsDealer)
+        print(f'Dealer have --> {self.cardsDealer}')
+        print(f'Dealer have > {self.tokenDealer} < tokens')
+        print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
