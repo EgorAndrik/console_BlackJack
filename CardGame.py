@@ -105,7 +105,7 @@ class BlackJack:
             else 'You Lose' if tokenPlayer < tokenDealer \
             else 'Draw'
 
-    def _first_dealer_move(self, deck: list):
+    def _first_dealer_move(self, deck: list) -> list:
         print('\n$$$$$$$$$$$$$$$-----DEALER-----$$$$$$$$$$$$$$$')
 
         deck, self.cardsDealer = self._cardSelection(deck, 1)
