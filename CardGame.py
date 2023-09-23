@@ -27,7 +27,7 @@ class BlackJack:
         ]
         self.tokenPlayer, self.tokenDealer = 0, 0
         self.cardsPlayer, self.cardsDealer = '', ''
-        self.cntRound, self.cntWin, self.cntLose = 0, 0, 0
+        self.cntRound, self.cntWin, self.cntLose, self.cntDraw = 0, 0, 0, 0
 
     def Game(self):
         os.system('CLS')
@@ -69,6 +69,8 @@ class BlackJack:
                     self.cntWin += 1
                 elif resRound == 'You Lose':
                     self.cntLose += 1
+                elif resRound == 'Draw':
+                    self.cntDraw += 1
                 print(f'\n{resRound}\n')
         else:
             print('\nYou lose\n')
@@ -78,7 +80,7 @@ class BlackJack:
         self.cntRound += 1
 
     def getResultsGame(self):
-        return f'Was {self.cntRound} rounds\nYou win {self.cntWin}\nYou lose {self.cntLose}\n'
+        return f'Was {self.cntRound} rounds\nYou win {self.cntWin}\nYou lose {self.cntLose}\nDraw {self.cntDraw}'
 
     def _cardShuffle(self, dataCard: list) -> list:
         for i in range(42):
